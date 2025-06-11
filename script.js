@@ -680,6 +680,55 @@ setInterval(() => {
     }
 }, 30000);
 
+// Resources filtering
+function filterResources(level) {
+    // Update filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+    
+    // Show/hide resource sections
+    const sections = document.querySelectorAll('.resource-section');
+    sections.forEach(section => {
+        const sectionLevel = section.getAttribute('data-level');
+        if (level === 'all' || sectionLevel === 'all' || sectionLevel === level) {
+            section.classList.remove('hidden');
+        } else {
+            section.classList.add('hidden');
+        }
+    });
+}
+
+// Book info modal
+function showBookInfo(bookId) {
+    const bookInfo = {
+        'csharp-dummies': {
+            title: 'C# для чайников',
+            description: 'Отличная книга для начинающих программистов. Простым языком объясняет основы C# и объектно-ориентированного программирования.',
+            pros: ['Простой язык', 'Много примеров', 'Хорошая структура'],
+            link: 'https://www.litres.ru/chuck-sphar/c-dlya-chaynikov/'
+        },
+        'clr-via-csharp': {
+            title: 'CLR via C# - Джеффри Рихтер',
+            description: 'Легендарная книга, которая объясняет внутреннее устройство .NET. Обязательна к прочтению для серьезных разработчиков.',
+            pros: ['Глубокие знания', 'Авторитетный автор', 'Практические советы'],
+            link: 'https://www.litres.ru/dzheffri-rihter/clr-via-c-programmirovanie-na-platforme-microsoft-net-framework-4-5-na-yazyke-c/'
+        },
+        'design-patterns': {
+            title: 'Паттерны проектирования',
+            description: 'Классическая книга о паттернах проектирования с примерами на разных языках, включая C#.',
+            pros: ['Классические паттерны', 'Примеры кода', 'Архитектурное мышление'],
+            link: 'https://refactoring.guru/ru/design-patterns'
+        }
+    };
+    
+    const book = bookInfo[bookId];
+    if (book) {
+        alert(`📚 ${book.title}\n\n${book.description}\n\n✅ Преимущества:\n${book.pros.map(pro => `• ${pro}`).join('\n')}\n\n🔗 Перейти к книге: ${book.link}`);
+    }
+}
+
 // Service Worker registration for offline support
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {

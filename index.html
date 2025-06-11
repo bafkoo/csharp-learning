@@ -35,6 +35,7 @@
         <nav class="nav">
             <button class="nav-btn active" onclick="showTab('dashboard')">📊 Дашборд</button>
             <button class="nav-btn" onclick="showTab('roadmap')">🗺️ Роудмап</button>
+            <button class="nav-btn" onclick="showTab('resources')">📚 Ресурсы</button>
             <button class="nav-btn" onclick="showTab('daily')">📝 Дневник</button>
             <button class="nav-btn" onclick="showTab('projects')">🚀 Проекты</button>
             <button class="nav-btn" onclick="showTab('achievements')">🏆 Достижения</button>
@@ -188,6 +189,286 @@
                     <div class="stage-header">
                         <h3>⚡ ЭТАП 3: Продвинутый C#</h3>
                         <span class="locked-label">🔒 Заблокировано</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resources Tab -->
+        <div id="resources" class="tab-content">
+            <div class="resources-container">
+                <h2>📚 Ресурсы для изучения C#</h2>
+                
+                <!-- Stage Filter -->
+                <div class="stage-filter">
+                    <button class="filter-btn active" onclick="filterResources('all')">Все ресурсы</button>
+                    <button class="filter-btn" onclick="filterResources('beginner')">Для начинающих</button>
+                    <button class="filter-btn" onclick="filterResources('intermediate')">Средний уровень</button>
+                    <button class="filter-btn" onclick="filterResources('advanced')">Продвинутый</button>
+                </div>
+
+                <!-- Free Courses -->
+                <div class="resource-section" data-level="beginner">
+                    <h3>🎓 Бесплатные курсы (Русский язык)</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>📖 Stepik - PRO C#</h4>
+                                <span class="resource-rating">⭐ 4.8 (97,821 учащихся)</span>
+                            </div>
+                            <p>Полный курс по C# от основ до продвинутых тем</p>
+                            <div class="resource-features">
+                                <span class="feature">✅ Бесплатно</span>
+                                <span class="feature">🏃‍♂️ Самостоятельный темп</span>
+                                <span class="feature">🏆 Сертификат</span>
+                            </div>
+                            <a href="https://stepik.org/course/4143" target="_blank" class="btn btn-primary">Перейти к курсу</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🏫 Открытое образование УрФУ</h4>
+                                <span class="resource-rating">⭐ 4.6 (14 недель)</span>
+                            </div>
+                            <p>Академический курс программирования на C#</p>
+                            <div class="resource-features">
+                                <span class="feature">✅ Бесплатно</span>
+                                <span class="feature">🎓 Университетский</span>
+                                <span class="feature">📅 14 недель</span>
+                            </div>
+                            <a href="https://openedu.ru" target="_blank" class="btn btn-primary">Открыть курс</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🌐 Microsoft Learn</h4>
+                                <span class="resource-rating">⭐ 4.9 (Официальный)</span>
+                            </div>
+                            <p>Официальная документация и интерактивные уроки</p>
+                            <div class="resource-features">
+                                <span class="feature">✅ Бесплатно</span>
+                                <span class="feature">🔥 Актуально</span>
+                                <span class="feature">🏅 Сертификация</span>
+                            </div>
+                            <a href="https://docs.microsoft.com/ru-ru/learn/dotnet/" target="_blank" class="btn btn-primary">Изучать</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- YouTube Channels -->
+                <div class="resource-section" data-level="all">
+                    <h3>📺 YouTube каналы</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🎮 АйтишныйДомосед</h4>
+                                <span class="resource-rating">👥 50K+ подписчиков</span>
+                            </div>
+                            <p>Практические уроки по C# и .NET разработке</p>
+                            <div class="resource-features">
+                                <span class="feature">🆓 Бесплатно</span>
+                                <span class="feature">🎯 Практика</span>
+                                <span class="feature">🇷🇺 Русский</span>
+                            </div>
+                            <a href="https://youtube.com/@АйтишныйДомосед" target="_blank" class="btn btn-primary">Смотреть</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>💎 Platinum DEV</h4>
+                                <span class="resource-rating">👥 25K+ подписчиков</span>
+                            </div>
+                            <p>ASP.NET Core, Entity Framework, современная разработка</p>
+                            <div class="resource-features">
+                                <span class="feature">🆓 Бесплатно</span>
+                                <span class="feature">🚀 Современно</span>
+                                <span class="feature">🌐 Веб-разработка</span>
+                            </div>
+                            <a href="https://youtube.com/@PlatinumDEV" target="_blank" class="btn btn-primary">Подписаться</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🔥 Курсы от KurSoft</h4>
+                                <span class="resource-rating">⭐ 4.7 (Бесплатно)</span>
+                            </div>
+                            <p>ASP.NET Core курсы с нуля до профи</p>
+                            <div class="resource-features">
+                                <span class="feature">✅ Бесплатно</span>
+                                <span class="feature">📚 Структурированно</span>
+                                <span class="feature">💻 Практика</span>
+                            </div>
+                            <a href="https://kursoft.ru" target="_blank" class="btn btn-primary">Курсы</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Books -->
+                <div class="resource-section" data-level="intermediate">
+                    <h3>📖 Книги</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>📚 "C# для чайников"</h4>
+                                <span class="resource-rating">⭐ 4.4 (Начинающим)</span>
+                            </div>
+                            <p>Простое введение в программирование на C#</p>
+                            <div class="resource-features">
+                                <span class="feature">👶 Для новичков</span>
+                                <span class="feature">🇷🇺 На русском</span>
+                                <span class="feature">📄 400+ страниц</span>
+                            </div>
+                            <a href="#" onclick="showBookInfo('csharp-dummies')" class="btn btn-primary">Подробнее</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🏆 "CLR via C#" - Джеффри Рихтер</h4>
+                                <span class="resource-rating">⭐ 4.9 (Классика)</span>
+                            </div>
+                            <p>Глубокое понимание .NET и CLR</p>
+                            <div class="resource-features">
+                                <span class="feature">🎓 Продвинутый</span>
+                                <span class="feature">🏅 Классика</span>
+                                <span class="feature">🔬 Глубоко</span>
+                            </div>
+                            <a href="#" onclick="showBookInfo('clr-via-csharp')" class="btn btn-primary">О книге</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>💡 "Паттерны проектирования"</h4>
+                                <span class="resource-rating">⭐ 4.6 (Банда четырех)</span>
+                            </div>
+                            <p>Классические паттерны с примерами на C#</p>
+                            <div class="resource-features">
+                                <span class="feature">🏗️ Архитектура</span>
+                                <span class="feature">🧠 Мышление</span>
+                                <span class="feature">💼 Для работы</span>
+                            </div>
+                            <a href="#" onclick="showBookInfo('design-patterns')" class="btn btn-primary">Изучить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Practice Platforms -->
+                <div class="resource-section" data-level="all">
+                    <h3>🎯 Платформы для практики</h3>
+                    <div class="resources-grid">
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>⚔️ Codewars</h4>
+                                <span class="resource-rating">🏆 2M+ программистов</span>
+                            </div>
+                            <p>Решай задачи и повышай свой ранг</p>
+                            <div class="resource-features">
+                                <span class="feature">🆓 Бесплатно</span>
+                                <span class="feature">🎮 Геймификация</span>
+                                <span class="feature">🌍 Сообщество</span>
+                            </div>
+                            <a href="https://codewars.com" target="_blank" class="btn btn-primary">Тренироваться</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🧩 LeetCode</h4>
+                                <span class="resource-rating">💼 Для собеседований</span>
+                            </div>
+                            <p>Алгоритмы и структуры данных</p>
+                            <div class="resource-features">
+                                <span class="feature">💻 Алгоритмы</span>
+                                <span class="feature">📈 Рейтинг</span>
+                                <span class="feature">💼 Собеседования</span>
+                            </div>
+                            <a href="https://leetcode.com" target="_blank" class="btn btn-primary">Решать</a>
+                        </div>
+
+                        <div class="resource-card">
+                            <div class="resource-header">
+                                <h4>🏃 HackerRank</h4>
+                                <span class="resource-rating">🏅 Соревнования</span>
+                            </div>
+                            <p>Конкурсы по программированию и сертификация</p>
+                            <div class="resource-features">
+                                <span class="feature">🏆 Соревнования</span>
+                                <span class="feature">📜 Сертификаты</span>
+                                <span class="feature">💼 Для карьеры</span>
+                            </div>
+                            <a href="https://hackerrank.com" target="_blank" class="btn btn-primary">Участвовать</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frameworks & Libraries -->
+                <div class="resource-section" data-level="intermediate">
+                    <h3>⚙️ Фреймворки и библиотеки</h3>
+                    <div class="frameworks-list">
+                        <div class="framework-item">
+                            <h4>🌐 ASP.NET Core</h4>
+                            <p>Современный веб-фреймворк для создания API и веб-приложений</p>
+                            <a href="https://docs.microsoft.com/aspnet/core" target="_blank" class="btn btn-primary">Документация</a>
+                        </div>
+                        <div class="framework-item">
+                            <h4>🗄️ Entity Framework Core</h4>
+                            <p>ORM для работы с базами данных</p>
+                            <a href="https://docs.microsoft.com/ef/core" target="_blank" class="btn btn-primary">Изучить</a>
+                        </div>
+                        <div class="framework-item">
+                            <h4>🖥️ WPF & WinUI</h4>
+                            <p>Создание десктопных приложений для Windows</p>
+                            <a href="https://docs.microsoft.com/dotnet/desktop/" target="_blank" class="btn btn-primary">Документация</a>
+                        </div>
+                        <div class="framework-item">
+                            <h4>📱 Xamarin & MAUI</h4>
+                            <p>Мобильная разработка для iOS и Android</p>
+                            <a href="https://docs.microsoft.com/xamarin/" target="_blank" class="btn btn-primary">Начать</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools -->
+                <div class="resource-section" data-level="beginner">
+                    <h3>🛠️ Инструменты разработчика</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <h4>💻 Visual Studio 2022</h4>
+                            <p>Основная IDE для C# разработки</p>
+                            <span class="tool-price">💰 Community - Бесплатно</span>
+                            <a href="https://visualstudio.microsoft.com/" target="_blank" class="btn btn-primary">Скачать</a>
+                        </div>
+                        <div class="tool-card">
+                            <h4>⚡ Visual Studio Code</h4>
+                            <p>Легкий редактор с расширениями для C#</p>
+                            <span class="tool-price">🆓 Бесплатно</span>
+                            <a href="https://code.visualstudio.com/" target="_blank" class="btn btn-primary">Установить</a>
+                        </div>
+                        <div class="tool-card">
+                            <h4>🚀 JetBrains Rider</h4>
+                            <p>Мощная IDE для .NET разработки</p>
+                            <span class="tool-price">🎓 Бесплатно для студентов</span>
+                            <a href="https://jetbrains.com/rider/" target="_blank" class="btn btn-primary">Попробовать</a>
+                        </div>
+                        <div class="tool-card">
+                            <h4>🐙 Git + GitHub</h4>
+                            <p>Система контроля версий</p>
+                            <span class="tool-price">🆓 Бесплатно</span>
+                            <a href="https://git-scm.com/" target="_blank" class="btn btn-primary">Изучить</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Roadmap Links -->
+                <div class="resource-section" data-level="all">
+                    <h3>🗺️ Планы обучения</h3>
+                    <div class="roadmap-links">
+                        <a href="#" onclick="showTab('roadmap')" class="roadmap-link">
+                            <h4>📈 Мой персональный роудмап</h4>
+                            <p>98 недель структурированного обучения</p>
+                        </a>
+                        <a href="https://roadmap.sh/asp-net-core" target="_blank" class="roadmap-link">
+                            <h4>🌐 ASP.NET Core Roadmap</h4>
+                            <p>Путь веб-разработчика на .NET</p>
+                        </a>
                     </div>
                 </div>
             </div>
