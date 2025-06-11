@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My C# Learning Journey</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Интерактивный трекер для изучения C# с геймификацией">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚀 My C# Learning Journey</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalDays">0</span>
+                    <span class="stat-label">Дней изучения</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="totalXP">0</span>
+                    <span class="stat-label">XP</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="currentLevel">Новичок</span>
+                    <span class="stat-label">Уровень</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" onclick="showTab('dashboard')">📊 Дашборд</button>
+            <button class="nav-btn" onclick="showTab('roadmap')">🗺️ Роудмап</button>
+            <button class="nav-btn" onclick="showTab('daily')">📝 Дневник</button>
+            <button class="nav-btn" onclick="showTab('projects')">🚀 Проекты</button>
+            <button class="nav-btn" onclick="showTab('achievements')">🏆 Достижения</button>
+        </nav>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="dashboard-grid">
+                <!-- Overall Progress -->
+                <div class="card">
+                    <h3>📈 Общий прогресс</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%" id="overallProgress"></div>
+                        </div>
+                        <span class="progress-text">0% (0/98 недель)</span>
+                    </div>
+                </div>
+
+                <!-- Current Goals -->
+                <div class="card">
+                    <h3>🎯 Цели на сегодня</h3>
+                    <div class="goals-list" id="todayGoals">
+                        <div class="goal-item">
+                            <input type="checkbox" id="goal1" onchange="updateGoalProgress()">
+                            <label for="goal1">Настроить среду разработки</label>
+                        </div>
+                        <div class="goal-item">
+                            <input type="checkbox" id="goal2" onchange="updateGoalProgress()">
+                            <label for="goal2">Написать Hello World</label>
+                        </div>
+                        <div class="goal-item">
+                            <input type="checkbox" id="goal3" onchange="updateGoalProgress()">
+                            <label for="goal3">Пройти первый урок на Stepik</label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="addGoal()">+ Добавить цель</button>
+                </div>
+
+                <!-- Current Week -->
+                <div class="card">
+                    <h3>📅 Текущая неделя</h3>
+                    <div class="week-info">
+                        <p><strong>Неделя 1:</strong> Введение и настройка</p>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%" id="weekProgress"></div>
+                            </div>
+                            <span class="progress-text">0% завершено</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Study Streak -->
+                <div class="card">
+                    <h3>🔥 Серия изучения</h3>
+                    <div class="streak-info">
+                        <div class="streak-number" id="streakDays">0</div>
+                        <p>дней подряд</p>
+                        <button class="btn btn-success" onclick="markStudyDay()">✅ Отметить сегодня</button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="card">
+                    <h3>📊 Быстрая статистика</h3>
+                    <div class="quick-stats">
+                        <div class="stat-row">
+                            <span>Задач решено:</span>
+                            <span id="tasksCompleted">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Проектов создано:</span>
+                            <span id="projectsCreated">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Часов изучения:</span>
+                            <span id="hoursStudied">0</span>
+                        </div>
+                        <div class="stat-row">
+                            <span>Достижений:</span>
+                            <span id="achievementsUnlocked">0/50</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Achievements -->
+                <div class="card">
+                    <h3>🏆 Последние достижения</h3>
+                    <div class="achievements-preview" id="recentAchievements">
+                        <p class="no-achievements">Пока нет достижений. Начните изучение!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Roadmap Tab -->
+        <div id="roadmap" class="tab-content">
+            <div class="roadmap-container">
+                <h2>🗺️ Роудмап изучения C#</h2>
+                
+                <div class="stage" data-stage="1">
+                    <div class="stage-header" onclick="toggleStage(1)">
+                        <h3>🎯 ЭТАП 1: Основы программирования</h3>
+                        <div class="stage-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/10 недель</span>
+                        </div>
+                    </div>
+                    <div class="stage-content">
+                        <div class="week-item">
+                            <h4>Неделя 1: Введение и настройка</h4>
+                            <ul class="tasks-list">
+                                <li><input type="checkbox"> Изучить что такое C# и .NET</li>
+                                <li><input type="checkbox"> Установить Visual Studio 2022</li>
+                                <li><input type="checkbox"> Написать "Hello World"</li>
+                                <li><input type="checkbox"> Создать GitHub репозиторий</li>
+                            </ul>
+                        </div>
+                        <div class="week-item">
+                            <h4>Неделя 2: Переменные и типы данных</h4>
+                            <ul class="tasks-list">
+                                <li><input type="checkbox"> Изучить примитивные типы</li>
+                                <li><input type="checkbox"> Конвертация типов</li>
+                                <li><input type="checkbox"> Создать конвертер валют</li>
+                            </ul>
+                        </div>
+                        <!-- Больше недель будут добавлены динамически -->
+                    </div>
+                </div>
+
+                <div class="stage" data-stage="2">
+                    <div class="stage-header" onclick="toggleStage(2)">
+                        <h3>🏗️ ЭТАП 2: ООП</h3>
+                        <div class="stage-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span>0/8 недель</span>
+                        </div>
+                    </div>
+                    <div class="stage-content">
+                        <p>Этап откроется после завершения предыдущего</p>
+                    </div>
+                </div>
+
+                <!-- Остальные этапы -->
+                <div class="stage locked" data-stage="3">
+                    <div class="stage-header">
+                        <h3>⚡ ЭТАП 3: Продвинутый C#</h3>
+                        <span class="locked-label">🔒 Заблокировано</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Log Tab -->
+        <div id="daily" class="tab-content">
+            <div class="daily-container">
+                <h2>📝 Ежедневный журнал</h2>
+                
+                <div class="daily-entry">
+                    <div class="date-selector">
+                        <input type="date" id="entryDate" onchange="loadDailyEntry()">
+                        <button class="btn btn-primary" onclick="createNewEntry()">Новая запись</button>
+                    </div>
+
+                    <div class="entry-form" id="entryForm">
+                        <div class="form-group">
+                            <label>🎯 Цели на день:</label>
+                            <textarea id="dailyGoals" placeholder="Что планируете изучить сегодня?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>📚 Что изучал:</label>
+                            <textarea id="whatStudied" placeholder="Какие темы изучали?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>💻 Написанный код:</label>
+                            <textarea id="codeWritten" placeholder="Какой код написали?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>⏰ Время изучения (часы):</label>
+                            <input type="number" id="studyTime" min="0" max="24" step="0.5">
+                        </div>
+
+                        <div class="form-group">
+                            <label>🎮 Задач решено:</label>
+                            <input type="number" id="tasksCount" min="0">
+                        </div>
+
+                        <div class="form-group">
+                            <label>🤔 Заметки и сложности:</label>
+                            <textarea id="notes" placeholder="Что было сложным? Какие вопросы возникли?"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>⭐ Оценка дня (1-5):</label>
+                            <div class="rating">
+                                <span class="star" onclick="setRating(1)">⭐</span>
+                                <span class="star" onclick="setRating(2)">⭐</span>
+                                <span class="star" onclick="setRating(3)">⭐</span>
+                                <span class="star" onclick="setRating(4)">⭐</span>
+                                <span class="star" onclick="setRating(5)">⭐</span>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success" onclick="saveDailyEntry()">💾 Сохранить запись</button>
+                    </div>
+                </div>
+
+                <!-- Recent Entries -->
+                <div class="recent-entries">
+                    <h3>📅 Последние записи</h3>
+                    <div id="recentEntries">
+                        <p>Пока нет записей. Создайте первую!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Tab -->
+        <div id="projects" class="tab-content">
+            <div class="projects-container">
+                <h2>🚀 Проекты</h2>
+                
+                <div class="projects-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalProjects">0</div>
+                        <div class="stat-label">Всего проектов</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completedProjects">0</div>
+                        <div class="stat-label">Завершено</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="inProgressProjects">0</div>
+                        <div class="stat-label">В процессе</div>
+                    </div>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Проекты будут загружены динамически -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Achievements Tab -->
+        <div id="achievements" class="tab-content">
+            <div class="achievements-container">
+                <h2>🏆 Система достижений</h2>
+                
+                <div class="level-info">
+                    <div class="current-level">
+                        <span class="level-icon">🌱</span>
+                        <div class="level-details">
+                            <h3 id="playerLevel">Новичок (Level 0)</h3>
+                            <div class="xp-bar">
+                                <div class="xp-fill" style="width: 0%" id="xpBar"></div>
+                            </div>
+                            <p><span id="currentXP">0</span> / <span id="nextLevelXP">100</span> XP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievements-grid" id="achievementsGrid">
+                    <!-- Достижения будут загружены динамически -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="goalModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('goalModal')">&times;</span>
+            <h3>Добавить новую цель</h3>
+            <input type="text" id="newGoalText" placeholder="Введите цель...">
+            <button class="btn btn-primary" onclick="saveNewGoal()">Добавить</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
